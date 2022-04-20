@@ -42,9 +42,14 @@ interface Props {
    * Indicates loading data
    */
   isLoading?: boolean;
+
+  /**
+   * Placeholder will be display when input value is empty
+   */
+  placeholder?: string;
 }
 
-const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange }) => {
+const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange, placeholder }) => {
   const [currentSearchValue, setSearchValue] = useState('');
   const [isOpened, setIsOpened] = useState(false);
   const hasResults = options.length > 0;
@@ -76,7 +81,7 @@ const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange
   return (
     <div className='select'>
       <div className='select__input'>
-        <Input onChange={onChangeInput} endAdornment={renderedLoading} onClick={onClickInput} value={currentSearchValue ?? ''} />
+        <Input onChange={onChangeInput} endAdornment={renderedLoading} onClick={onClickInput} value={currentSearchValue ?? ''} placeholder={placeholder} />
         {error && <p className='select__error'>{error}</p>}
       </div>
       {isOpened && <div className='select__dropdown'>
