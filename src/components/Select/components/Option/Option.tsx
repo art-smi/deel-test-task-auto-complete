@@ -36,14 +36,17 @@ const Option: FC<Props> = ({ data, onClick, isSelected, highlightedText }) => {
 
   const content = useMemo(() => {
     if (!highlightedText || highlightedText === label) {
-      return label
+      return label;
     }
 
-    return textParts.map((part, index) => 
-      <span key={`${part}_${index}`} className={part.toLowerCase() === highlightedText.toLowerCase() ? 'option__highlight' : '' }>
+    return textParts.map((part, index) => (
+      <span
+        key={`${part}_${index}`}
+        className={part.toLowerCase() === highlightedText.toLowerCase() ? 'option__highlight' : ''}
+      >
         {part}
       </span>
-    );
+    ));
   }, [highlightedText, label, textParts]);
 
   return (
@@ -51,7 +54,7 @@ const Option: FC<Props> = ({ data, onClick, isSelected, highlightedText }) => {
       {content}
       {isSelected && <span className='option__checkmark'>✅</span>}
     </div>
-  )
-}
+  );
+};
 
 export default Option;

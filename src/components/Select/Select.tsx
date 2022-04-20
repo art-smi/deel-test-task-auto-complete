@@ -54,25 +54,31 @@ const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange
   const [currentSearchValue, setSearchValue] = useState('');
   const [isOpened, setIsOpened] = useState(false);
   const hasResults = options.length > 0;
-  const onChangeInput = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSearchValue(value);
-    onChangeFilter?.(value);
-  }, [onChangeFilter]);
+  const onChangeInput = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setSearchValue(value);
+      onChangeFilter?.(value);
+    },
+    [onChangeFilter],
+  );
 
   const onClickInput = useCallback(() => {
-    setIsOpened(!isOpened)
+    setIsOpened(!isOpened);
   }, [isOpened]);
 
-  const onClickSelectOption = useCallback((key: SelectOption['key']) => {
-    onChange?.(key);
-    setSelectedOption(key);
-    setIsOpened(false);
+  const onClickSelectOption = useCallback(
+    (key: SelectOption['key']) => {
+      onChange?.(key);
+      setSelectedOption(key);
+      setIsOpened(false);
 
-    // get original option label by clicked key
-    const originalOption = options.find((item) => item.key === key);
-    setSearchValue(originalOption?.label ?? '');
-  }, [onChange, options]);
+      // get original option label by clicked key
+      const originalOption = options.find((item) => item.key === key);
+      setSearchValue(originalOption?.label ?? '');
+    },
+    [onChange, options],
+  );
 
   const renderedLoading = isLoading ? (
     <div className='select__loader'>
@@ -83,14 +89,32 @@ const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange
   return (
     <div className='select'>
       <div className='select__input'>
-        <Input onChange={onChangeInput} endAdornment={renderedLoading} onClick={onClickInput} value={currentSearchValue ?? ''} placeholder={placeholder} />
+        <Input
+          onChange={onChangeInput}
+          endAdornment={renderedLoading}
+          onClick={onClickInput}
+          value={currentSearchValue ?? ''}
+          placeholder={placeholder}
+        />
         {error && <p className='select__error'>{error}</p>}
       </div>
-      {isOpened && <div className='select__dropdown'>
-        {hasResults && options.map((option) => <Option key={option.key} data={option} onClick={onClickSelectOption} highlightedText={currentSearchValue} isSelected={selectedOption === option.key} />)}
-        {!hasResults && <span className='select__nothing'>Nothing to show :(</span>}
-      </div>}
+      {isOpened && (
+        <div className='select__dropdown'>
+          {hasResults &&
+            options.map((option) => (
+              <Option
+                key={option.key}
+                data={option}
+                onClick={onClickSelectOption}
+                highlightedText={currentSearchValue}
+                isSelected={selectedOption === option.key}
+              />
+            ))}
+          {!hasResults && <span className='select__nothing'>Nothing to show :(</span>}
+        </div>
+      )}
     </div>
-)}
+  );
+};
 
 export default Select;
