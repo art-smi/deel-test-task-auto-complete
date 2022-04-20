@@ -1,7 +1,8 @@
-import React, { FC, useCallback, useState } from 'react';
+import { FC } from 'react';
 import Input from '../Input';
 import Loader from '../Loader';
 import Option from './components/Option';
+import useSelectEvents from './hooks/useSelectEvents';
 
 import './Select.css';
 
@@ -17,7 +18,7 @@ export interface SelectOption {
   label: string;
 }
 
-interface Props {
+export interface SelectProperties {
   /**
    * Select options to display
    */
@@ -49,36 +50,12 @@ interface Props {
   placeholder?: string;
 }
 
-const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange, placeholder }) => {
-  const [selectedOption, setSelectedOption] = useState<SelectOption['key']>();
-  const [currentSearchValue, setSearchValue] = useState('');
-  const [isOpened, setIsOpened] = useState(false);
+const Select: FC<SelectProperties> = ({ options, onChangeFilter, error, isLoading, onChange, placeholder }) => {
   const hasResults = options.length > 0;
-  const onChangeInput = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
-      setSearchValue(value);
-      onChangeFilter?.(value);
-    },
-    [onChangeFilter],
-  );
-
-  const onClickInput = useCallback(() => {
-    setIsOpened(!isOpened);
-  }, [isOpened]);
-
-  const onClickSelectOption = useCallback(
-    (key: SelectOption['key']) => {
-      onChange?.(key);
-      setSelectedOption(key);
-      setIsOpened(false);
-
-      // get original option label by clicked key
-      const originalOption = options.find((item) => item.key === key);
-      setSearchValue(originalOption?.label ?? '');
-    },
-    [onChange, options],
-  );
+  const [
+    { selectedOption, currentSearchValue, isOpened },
+    { onChangeInput, onClickInput, onClickSelectOption}
+  ] = useSelectEvents({ options, onChange, onChangeFilter });
 
   const renderedLoading = isLoading ? (
     <div className='select__loader'>
