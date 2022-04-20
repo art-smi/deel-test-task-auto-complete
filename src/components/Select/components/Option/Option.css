@@ -1,6 +1,8 @@
 .option {
-  padding: 4px;
+  padding: 4px 6px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .option:hover {
@@ -9,4 +11,9 @@
 
 .option__highlight {
   background-color: var(--yellow);
+}
+
+.option__checkmark {
+  margin-left: auto;
+  padding-left: 4px;
 }

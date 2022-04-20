@@ -26,7 +26,6 @@ interface Props {
 }
 
 const Option: FC<Props> = ({ data, onClick, isSelected, highlightedText }) => {
-  
   const { key, label } = data;
   const onClickWrapper = useCallback(() => {
     onClick?.(key);
@@ -36,7 +35,7 @@ const Option: FC<Props> = ({ data, onClick, isSelected, highlightedText }) => {
   const textParts = label.split(highlightRegExp);
 
   const content = useMemo(() => {
-    if (!highlightedText) {
+    if (!highlightedText || highlightedText === label) {
       return label
     }
 
@@ -48,7 +47,10 @@ const Option: FC<Props> = ({ data, onClick, isSelected, highlightedText }) => {
   }, [highlightedText, label, textParts]);
 
   return (
-    <div className='option' onClick={onClickWrapper}>{content}</div>
+    <div className='option' onClick={onClickWrapper}>
+      {content}
+      {isSelected && <span className='option__checkmark'>✅</span>}
+    </div>
   )
 }
 

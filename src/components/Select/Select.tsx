@@ -50,6 +50,7 @@ interface Props {
 }
 
 const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange, placeholder }) => {
+  const [selectedOption, setSelectedOption] = useState<SelectOption['key']>();
   const [currentSearchValue, setSearchValue] = useState('');
   const [isOpened, setIsOpened] = useState(false);
   const hasResults = options.length > 0;
@@ -65,6 +66,7 @@ const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange
 
   const onClickSelectOption = useCallback((key: SelectOption['key']) => {
     onChange?.(key);
+    setSelectedOption(key);
     setIsOpened(false);
 
     // get original option label by clicked key
@@ -85,7 +87,7 @@ const Select: FC<Props> = ({ options, onChangeFilter, error, isLoading, onChange
         {error && <p className='select__error'>{error}</p>}
       </div>
       {isOpened && <div className='select__dropdown'>
-        {hasResults && options.map((option) => <Option key={option.key} data={option} onClick={onClickSelectOption} highlightedText={currentSearchValue} />)}
+        {hasResults && options.map((option) => <Option key={option.key} data={option} onClick={onClickSelectOption} highlightedText={currentSearchValue} isSelected={selectedOption === option.key} />)}
         {!hasResults && <span className='select__nothing'>Nothing to show :(</span>}
       </div>}
     </div>
