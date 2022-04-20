@@ -27,6 +27,7 @@ Answer:
 ## 5. What is a fragment and why do we need it? Give an example where it might break my app
 
 Answer: React.Fragment is virtual wrapper for your components. Most use case: when you need two+ elements in a component, but you don't need(or you can't) to add an additional dom-element, you can use <></> or React.Fragment. Or it can be used for the passing ref for a group of components without a parent.
+
 I don't remember situations, when React.Fragment can break the app.
 
 ## 6. Give 3 examples of the HOC pattern
@@ -66,7 +67,9 @@ Answer:
 ## 8. How many arguments does setState take and why is it async
 
 Answer: setState has two arguments: first – the new state(*), the seconds its function which will be run after changing the state.
+
 *You can also pass function like this: (oldState) => {} instead of the new state, for getting the latest state and modify him.
+
 Async because React waits for all calls setState and you can get an old state in another place for preventing re-renders. If re-render not was fired and you need the latest real state you can use setState with function in the first argument, as I showed above.
 
 ## 9. List the steps needed to migrate a Class to Function Component
@@ -92,4 +95,5 @@ Answer:
 ## 11. How to render an HTML string coming from the server
 
 Answer: you can use the attribute `dangerouslySetInnerHTML={ __html: html }` for the parent element, it will appear your html from the server in children. But it's not safe.
+
 Also, you can use some 3rd libraries which parse provided HTML and show it by escaping some symbols.
