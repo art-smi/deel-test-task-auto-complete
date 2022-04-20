@@ -1,0 +1,39 @@
+.select {
+  width: 100%;
+  position: relative;
+}
+
+.select__input {
+  width: 100%;
+}
+
+.select__loader {
+  width: 20px;
+  height: 20px;
+}
+
+.select__error {
+  color: var(--error);
+  margin: 0;
+  text-align: left;
+  padding-top: 4px;
+  font-size: 12px;
+}
+
+.select__dropdown {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: scroll;
+  max-height: 200px;
+}
+
+.select__nothing {
+  display: block;
+  padding: 4px;
+  text-align: center;
+  opacity: 0.5;
+}

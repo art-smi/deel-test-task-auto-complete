@@ -1,0 +1,12 @@
+.option {
+  padding: 4px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: var(--accent-1);
+}
+
+.option__highlight {
+  background-color: var(--yellow);
+}
