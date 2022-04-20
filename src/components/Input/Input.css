@@ -1,0 +1,20 @@
+.input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px;
+  height: 32px;
+}
+
+.input__field {
+  flex: 1 1 auto;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input__end-adornment {
+  margin-left: 4px;
+}
