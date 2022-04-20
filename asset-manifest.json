@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/deel-test-task-auto-complete/static/css/main.e60b6a20.css",
-    "main.js": "/deel-test-task-auto-complete/static/js/main.036ab44f.js",
+    "main.js": "/deel-test-task-auto-complete/static/js/main.8c4bd342.js",
     "index.html": "/deel-test-task-auto-complete/index.html",
     "main.e60b6a20.css.map": "/deel-test-task-auto-complete/static/css/main.e60b6a20.css.map",
-    "main.036ab44f.js.map": "/deel-test-task-auto-complete/static/js/main.036ab44f.js.map"
+    "main.8c4bd342.js.map": "/deel-test-task-auto-complete/static/js/main.8c4bd342.js.map"
   },
   "entrypoints": [
     "static/css/main.e60b6a20.css",
-    "static/js/main.036ab44f.js"
+    "static/js/main.8c4bd342.js"
   ]
 }
